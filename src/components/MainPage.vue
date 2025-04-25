@@ -9,7 +9,7 @@
       </div>
   
       <div class="scrollable-text">
-        <p v-for="(line, index) in textLines" :key="index">{{ line }}</p>
+        <p v-for="(line, index) in linesOfText" :key="index">{{ line }}</p>
       </div>
     </div>
    
@@ -18,11 +18,15 @@
   <script setup>
   import { useRouter } from 'vue-router'
   const router = useRouter()
+
+
   const goToLogIn = () => {
   router.push('/logIn') 
 }
  
-    
+    // const searchPokemon = () => {
+
+    // }
   
     
   </script>

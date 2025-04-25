@@ -4,11 +4,11 @@
     <form @submit.prevent="login">
       <div>
         <label for="username">Username:</label>
-        <input type="text" v-model="username" id="username" required />
+        <input type="text" v-model="username" required />
       </div>
       <div>
         <label for="password">Password:</label>
-        <input type="password" v-model="password" id="password" required />
+        <input type="password" v-model="password" required />
       </div>
       <button type="submit">Login</button>
     </form>
@@ -29,7 +29,7 @@ const goToRegister = () => {
 
 
 const login = () => {
-  
+  //Insert amazing and groundbreaking login logic here.
 }
 </script>
 
