@@ -5,6 +5,7 @@ import MainPage from './components/MainPage.vue'
 import LogInPage from './components/LogInPage.vue'
 import ApiTest from './components/ApiTest.vue'
 import RegisterPage from './components/RegisterPage.vue'
+import ProfilePage from './components/ProfilePage.vue'
 
 const router = createRouter({
    history: createWebHistory(),
@@ -13,6 +14,7 @@ const router = createRouter({
        {path: '/logIn', component: LogInPage},
        {path: '/test', component: ApiTest},
        {path: '/register', component: RegisterPage},
+       {path: '/profile', component: ProfilePage}
        
        
    ]

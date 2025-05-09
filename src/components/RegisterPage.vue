@@ -39,7 +39,8 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
-
+import { useRouter } from 'vue-router'
+ const router = useRouter();
  const username = ref('');
  const email = ref('');
  const password = ref('');
@@ -51,17 +52,19 @@ if (!username.value || !email.value || !password.value) {
 }
   try {
     const response = await axios.post('http://localhost:3000/api/createUser', { 
-    USERNAME: username.value,
+    NAME: username.value,
     EMAIL: email.value,
     PASSWORD: password.value
     });
     console.log("Success:", response.data); 
     console.log(email.value, password.value, username.value);
+    router.push('/logIn') 
     } 
   catch (error) {
     console.error("Error:", error); 
   }
 };
+
 </script>
   <style scoped>
   .register-container {

@@ -4,10 +4,14 @@
         <input type="text" placeholder="Search..." v-model="searchQuery" />
       </div>
   
-      <div class="login-button">
-        <button @click="goToLogIn">Log In</button>
+      <div class="profile-button">
+        <button @click="goToProfile">Profile</button>
       </div>
   
+      <div class="summon-button">
+        <button @click="summonCreatures"></button>
+      </div>
+
       <div class="scrollable-text">
         <p v-for="(line, index) in linesOfText" :key="index">{{ line }}</p>
       </div>
@@ -20,13 +24,13 @@
   const router = useRouter()
 
 
-  const goToLogIn = () => {
-  router.push('/logIn') 
+  const goToProfile = () => {
+  router.push('/profile') 
 }
  
-    // const searchPokemon = () => {
-
-    // }
+    const summonCreatures = () => {
+      
+    }
   
     
   </script>
@@ -60,13 +64,19 @@
   }
   
   
-  .login-button {
+  .profile-button {
     position: absolute;
     top: 20px;
     right: 20px;
   }
+
+  .summon-button{
+    position: absolute;
+    top: 20px;
+    left: 20px
+  }
   
-  .login-button button {
+  .profile-button button {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #1ba6d4;
@@ -76,7 +86,7 @@
     cursor: pointer;
   }
   
-  .login-button button:hover {
+  .profile-button button:hover {
     background-color: #1ba6d4;
   }
   

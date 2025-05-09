@@ -6,12 +6,12 @@
 
 <script setup>
  import { useRouter } from 'vue-router';
-
+ import { onMounted } from 'vue'
  const router = useRouter()
-  startUp()
-  function startUp(){
-  router.push('/main')
-}
+onMounted(() => {
+  router.push('/logIn')
+})
+ 
 </script>
 
 

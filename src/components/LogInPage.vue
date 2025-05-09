@@ -19,17 +19,32 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-
+import {ref} from "vue"
+import axios from "axios"
 const router = useRouter()
-
+const username = ref('')
+const password = ref('')
 
 const goToRegister = () => {
   router.push('/register') 
 }
 
 
-const login = () => {
-  //Insert amazing and groundbreaking login logic here.
+const login = async () => {
+  try {
+  const response = await axios.post('http://localhost:3000/api/login', {
+    USERNAME: username.value, 
+    PASSWORD: password.value
+  })
+  console.log('token:',response.data.Token)
+   const data = response.data;
+   localStorage.setItem('token', data.token)
+   console.log(response)
+   router.push('/main')
+  }
+  catch (error) {
+    console.error("Error:", error); 
+  }
 }
 </script>
 
