@@ -1,15 +1,17 @@
 <template>
     <div class="home-container">
+      <form @submit.prevent="summonCreatures">
       <div class="search-bar">
         <input type="text" placeholder="Search..." v-model="searchQuery" />
       </div>
+      </form>
   
       <div class="profile-button">
         <button @click="goToProfile">Profile</button>
       </div>
   
       <div class="summon-button">
-        <button @click="summonCreatures"></button>
+        <button @click="summonCreatures" >Search</button>
       </div>
 
       <div class="scrollable-text">
@@ -21,17 +23,42 @@
   
   <script setup>
   import { useRouter } from 'vue-router'
+  import { ref } from 'vue'
+  import axios from 'axios';
   const router = useRouter()
+  const linesOfText = ref([])
+  const searchQuery = ref('')
+  const pokemon = ref(null)
 
 
   const goToProfile = () => {
   router.push('/profile') 
 }
- 
-    const summonCreatures = () => {
-      
+
+const summonCreatures = async () => {
+  try {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.value.toLowerCase()}`)
+
+    const name = response.data.name
+    const types = response.data.types.map(indexType => indexType.type.name)
+    const locationResponse = await axios.get(response.data.location_area_encounters)
+    const locations = locationResponse.data.map(indexLocation => indexLocation.location_area.name)
+
+    pokemon.value = {
+      name,
+      types,
+      locations
     }
-  
+    linesOfText.value = []
+    linesOfText.value.push(`Name: ${pokemon.value.name}`)
+    linesOfText.value.push(`Types: ${pokemon.value.types.join(', ')}`)
+    linesOfText.value.push(`Locations: ${pokemon.value.locations.join(', ')}`)
+  } 
+  catch (error) {
+    console.error('Error fetching data:', error)
+    pokemon.value = null
+  }
+}
     
   </script>
   
