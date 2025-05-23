@@ -10,6 +10,7 @@ import ProfilePage from './components/ProfilePage.vue'
 const router = createRouter({
    history: createWebHistory(),
    routes: [
+       {path: '/', redirect: '/logIn'},
        {path: '/main', component: MainPage},
        {path: '/logIn', component: LogInPage},
        {path: '/test', component: ApiTest},

@@ -10,12 +10,14 @@
         <button @click="goToProfile">Profile</button>
       </div>
   
-      <div class="summon-button">
-        <button @click="summonCreatures" >Search</button>
-      </div>
+   
 
       <div class="scrollable-text">
         <p v-for="(line, index) in linesOfText" :key="index">{{ line }}</p>
+      </div>
+
+      <div class="capture-button">
+        <button @click="capturePokemon">Capture</button>
       </div>
     </div>
    
@@ -23,17 +25,40 @@
   
   <script setup>
   import { useRouter } from 'vue-router'
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
+  import {jwtDecode} from 'jwt-decode';
   import axios from 'axios';
   const router = useRouter()
   const linesOfText = ref([])
   const searchQuery = ref('')
   const pokemon = ref(null)
-
+  const decoded = ref({})
 
   const goToProfile = () => {
   router.push('/profile') 
 }
+function updateDecoded() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        decoded.value = jwtDecode(token);
+      } catch (error) {
+        console.error('Invalid token:', error);
+      }
+    } else {
+      decoded.value = {};
+    }
+  }
+
+  onMounted(() => {
+    updateDecoded();
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'token') {
+      updateDecoded();
+    }
+  });
 
 const summonCreatures = async () => {
   try {
@@ -59,6 +84,30 @@ const summonCreatures = async () => {
     pokemon.value = null
   }
 }
+
+const capturePokemon = async () => {
+  
+  if(!pokemon.value) {
+    alert('No Pokemon to capture!')
+    return
+  }
+  try{
+   await axios.post('http://localhost:3000/api/capturePokemon',{
+  NAME: pokemon.value.name,
+  TYPES: pokemon.value.types,
+  LOCATIONS: pokemon.value.locations,
+  ID: decoded.value.ID
+})} catch(error){
+    alert('Error capturing Pokemon')
+  }
+  alert(`Captured ${pokemon.value.name}`)
+  linesOfText.value = []
+  pokemon.value = null
+
+
+}
+
+
     
   </script>
   
@@ -97,11 +146,6 @@ const summonCreatures = async () => {
     right: 20px;
   }
 
-  .summon-button{
-    position: absolute;
-    top: 20px;
-    left: 20px
-  }
   
   .profile-button button {
     padding: 10px 20px;
@@ -114,7 +158,7 @@ const summonCreatures = async () => {
   }
   
   .profile-button button:hover {
-    background-color: #1ba6d4;
+    background-color: #077093;
   }
   
   
@@ -134,5 +178,25 @@ const summonCreatures = async () => {
     margin: 10px 0;
     font-size: 16px;
   }
+
+  .capture-button {
+    margin-top: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .capture-button button {
+    padding: 12px 32px;
+    font-size: 18px;
+    background-color: #63ca08;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .capture-button button:hover {
+    background-color: #469c04;
+  }
   </style>
-  

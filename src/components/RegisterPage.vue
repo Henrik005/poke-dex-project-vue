@@ -56,14 +56,28 @@ if (!username.value || !email.value || !password.value) {
     EMAIL: email.value,
     PASSWORD: password.value
     });
-    console.log("Success:", response.data); 
+  console.log("Success:", response.data); 
     console.log(email.value, password.value, username.value);
-    router.push('/logIn') 
+    
     } 
   catch (error) {
     console.error("Error:", error); 
   }
+  router.push('/main')
 };
+
+// const createrUserTable = async () => {
+//   try{
+//   const response = await axios.post('http://localhost:3000/api/createPokeTable', {
+//       NAME: username.value
+//     });
+//     console.log("Succes:", response.data)
+//   }
+//   catch (error){
+//     console.error("Error:", error)
+//   }
+//   router.push('/main')
+// }
 
 </script>
   <style scoped>
