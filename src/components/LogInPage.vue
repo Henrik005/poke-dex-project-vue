@@ -36,7 +36,7 @@ const login = async () => {
     USERNAME: username.value, 
     PASSWORD: password.value
   })
-  console.log('token:',response.data.Token)
+   console.log('token:',response.data.token)
    const data = response.data;
    localStorage.setItem('token', data.token)
    console.log(response)

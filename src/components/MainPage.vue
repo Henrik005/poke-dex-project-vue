@@ -37,7 +37,7 @@
   const goToProfile = () => {
   router.push('/profile') 
 }
-function updateDecoded() {
+ function updateDecoded() {
     const token = localStorage.getItem('token');
     if (token) {
       try {
@@ -50,11 +50,11 @@ function updateDecoded() {
     }
   }
 
-  onMounted(() => {
+   onMounted(() => {
     updateDecoded();
   });
 
-  window.addEventListener('storage', (event) => {
+ window.addEventListener('storage', (event) => {
     if (event.key === 'token') {
       updateDecoded();
     }
@@ -65,49 +65,55 @@ const summonCreatures = async () => {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchQuery.value.toLowerCase()}`)
 
     const name = response.data.name
-    const types = response.data.types.map(indexType => indexType.type.name)
+    const types = response.data.types.map(t => t.type.name)
     const locationResponse = await axios.get(response.data.location_area_encounters)
-    const locations = locationResponse.data.map(indexLocation => indexLocation.location_area.name)
+    const locations = locationResponse.data.map(loc => loc.location_area.name)
 
     pokemon.value = {
       name,
       types,
       locations
     }
+
     linesOfText.value = []
     linesOfText.value.push(`Name: ${pokemon.value.name}`)
     linesOfText.value.push(`Types: ${pokemon.value.types.join(', ')}`)
     linesOfText.value.push(`Locations: ${pokemon.value.locations.join(', ')}`)
   } 
   catch (error) {
+    alert('Incorrect Name Or Pokemon Does Not Exist');
     console.error('Error fetching data:', error)
     pokemon.value = null
   }
 }
 
-const capturePokemon = async () => {
-  
-  if(!pokemon.value) {
-    alert('No Pokemon to capture!')
-    return
+ const capturePokemon = async () => {
+  if (!pokemon.value) {
+    alert('No Pokemon to capture!');
+    return;
   }
-  try{
-   await axios.post('http://localhost:3000/api/capturePokemon',{
-  NAME: pokemon.value.name,
-  TYPES: pokemon.value.types,
-  LOCATIONS: pokemon.value.locations,
-  ID: decoded.value.ID
-})} catch(error){
-    alert('Error capturing Pokemon')
+  if (!decoded.value.ID) {
+    alert('You must be logged in to capture a Pokemon!');
+    return;
   }
-  alert(`Captured ${pokemon.value.name}`)
-  linesOfText.value = []
-  pokemon.value = null
-
-
+  try {
+    console.log('Decoded:', decoded.value);
+    console.log('TrainerID:', decoded.value.ID);
+    await axios.post('http://localhost:3000/api/capturePokemon', {
+      PokemonNAME: pokemon.value.name,
+      PokemonTYPE: pokemon.value.types,
+      PokemonLOCATIONS: pokemon.value.locations,
+      TrainerID: decoded.value.ID
+      
+    });
+    alert(`Pokemon Captured!!!`);
+    linesOfText.value = [];
+    pokemon.value = null;
+  } catch (error) {
+    alert('Error capturing Pokemon');
+    console.error(error);
+  }
 }
-
-
     
   </script>
   
