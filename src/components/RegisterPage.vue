@@ -66,19 +66,6 @@ if (!username.value || !email.value || !password.value) {
   router.push('/main')
 };
 
-// const createrUserTable = async () => {
-//   try{
-//   const response = await axios.post('http://localhost:3000/api/createPokeTable', {
-//       NAME: username.value
-//     });
-//     console.log("Succes:", response.data)
-//   }
-//   catch (error){
-//     console.error("Error:", error)
-//   }
-//   router.push('/main')
-// }
-
 </script>
   <style scoped>
   .register-container {
