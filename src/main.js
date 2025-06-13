@@ -6,6 +6,8 @@ import LogInPage from './components/LogInPage.vue'
 import ApiTest from './components/ApiTest.vue'
 import RegisterPage from './components/RegisterPage.vue'
 import ProfilePage from './components/ProfilePage.vue'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 
 const router = createRouter({
    history: createWebHistory(),

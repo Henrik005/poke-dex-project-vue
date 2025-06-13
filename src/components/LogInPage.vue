@@ -1,19 +1,23 @@
 <template>
-  <div class="login">
-    <h2>Login</h2>
+  <div class = "container d-flex justify-content-center align-items-center vh-150">
+  <div class="border pt-5 p-5 mb-2 bg-dark text-white login rounded-4" style = "width: 600px; height: 400px;">
+    <h2 class ="user-select-none">Enter Your Username & Password</h2>
     <form @submit.prevent="login">
+      
       <div>
-        <label for="username">Username:</label>
-        <input type="text" v-model="username" required />
+        <input type="text" class="form-control m-2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="username" required />
       </div>
       <div>
-        <label for="password">Password:</label>
-        <input type="password" v-model="password" required />
+       <input type="text" class="form-control m-2" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" v-model="password" required />
       </div>
-      <button type="submit">Login</button>
+      
+      <button type="button" class ="btn btn-light btn-outline-primary m-3">Login</button>
+      
     </form>
+    <p></p>
+    <h5 class="text-center user-select-none ">Don't have an account? Register <a @click="goToRegister" class ="icon-link pe-auto">Here!</a></h5>
     
-    <button @click="goToRegister" class="register-btn">Register?</button>
+  </div>
   </div>
 </template>
 
@@ -49,60 +53,5 @@ const login = async () => {
 </script>
 
 <style scoped>
-.login {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
 
-h2 {
-  text-align: center;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-div {
-  margin-bottom: 15px;
-}
-
-label {
-  font-weight: bold;
-}
-
-input {
-  padding: 8px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-button {
-  padding: 10px;
-  background-color: #1ba6d4;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0893c1;
-}
-
-
-.register-btn {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #ff8c00;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.register-btn:hover {
-  background-color: #e07b00;
-}
 </style>

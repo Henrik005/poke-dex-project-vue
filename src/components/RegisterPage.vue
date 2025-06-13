@@ -1,36 +1,27 @@
 <template>
-    <div class="register-container">
-      <h2>Register</h2>
+    <div class="container d-flex justify-content-center align-items-center vh-150">
+      <div class="border pt-5 p-5 mb-2 bg-dark text-white register-container rounded-4" style="width: 600px; height: 400px;">
+      <h2 class="user-select-none">Please Enter Your Details Bellow</h2>
       <form @submit.prevent="createUser"> 
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            v-model="username"
-            placeholder="Enter username"
-          />
-        </div>
+        <div>
+        <input type="text" class="form-control m-2" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" v-model="email" required />
+      </div>
   
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            v-model="email"
-            placeholder="Enter email"
-          />
-        </div>
+        <div>
+        <input type="text" class="form-control m-2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="username" required />
+      </div>
   
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            v-model="password"
-            placeholder="Enter password"
-          />
-        </div>
+        <div>
+        <input type="text" class="form-control m-2" placeholder="Password" aria-label="Password" aria-describedby="Password" v-model="password" required />
+      </div>
+
+        <div>
+        <input type="text" class="form-control m-2" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1" v-model="confirmPassword" required />
+      </div>
   
-        <button type="submit">Register</button>
+        <button type="submit" class ="btn btn-light btn-outline-success m-2">Register</button>
       </form>
+      </div>
     </div>
   </template>
   
@@ -44,73 +35,41 @@ import { useRouter } from 'vue-router'
  const username = ref('');
  const email = ref('');
  const password = ref('');
- 
+ const confirmPassword = ref('');
 
 const createUser = async () => {
 if (!username.value || !email.value || !password.value) {
     return
 }
+if (password.value !== confirmPassword.value) {
+    console.error("Passwords do not match");
+    alert("Passwords do not match");
+    return;}
+
   try {
     const response = await axios.post('http://localhost:3000/api/createUser', { 
     NAME: username.value,
     EMAIL: email.value,
     PASSWORD: password.value
     });
-  console.log("Success:", response.data); 
+    console.log("Success:", response.data); 
     console.log(email.value, password.value, username.value);
-    
+
+   console.log('token:',response.data.token)
+   const data = response.data;
+   localStorage.setItem('token', data.token)
+   console.log(response)
+   router.push('/main')
     } 
   catch (error) {
     console.error("Error:", error); 
   }
-  router.push('/main')
+  
+  
 };
 
 </script>
   <style scoped>
-  .register-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
   
-  h2 {
-    text-align: center;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #1ba6d4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    background-color: #cccccc;
-  }
-  
-  .error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-  }
   </style>
   

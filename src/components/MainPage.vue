@@ -1,4 +1,5 @@
 <template>
+  
     <div class="home-container">
       <form @submit.prevent="summonCreatures">
       <div class="search-bar">
@@ -11,9 +12,11 @@
       </div>
   
    
-
       <div class="scrollable-text">
-        <p v-for="(line, index) in linesOfText" :key="index">{{ line }}</p>
+        <p v-for="(line, index) in linesOfText" :key="index">{{ line  }}</p>
+        <div class="capture-button">
+        <button @click="capturePokemon">Capture</button>
+      </div>
       </div>
 
       <div class="capture-button">
@@ -33,7 +36,7 @@
   const searchQuery = ref('')
   const pokemon = ref(null)
   const decoded = ref({})
-
+  
   const goToProfile = () => {
   router.push('/profile') 
 }
@@ -118,91 +121,5 @@ const summonCreatures = async () => {
   </script>
   
   <style scoped>
-  .home-container {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-  }
   
-  
-  .search-bar {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .search-bar input {
-    padding: 10px;
-    font-size: 16px;
-    width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center; 
-  }
-  
-  
-  .profile-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-
-  
-  .profile-button button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #1ba6d4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .profile-button button:hover {
-    background-color: #077093;
-  }
-  
-  
-  .scrollable-text {
-    max-height: 60vh;
-    width: 80%;
-    overflow-y: scroll;
-    margin-top: 80px;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .scrollable-text p {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-
-  .capture-button {
-    margin-top: 20px;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .capture-button button {
-    padding: 12px 32px;
-    font-size: 18px;
-    background-color: #63ca08;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  .capture-button button:hover {
-    background-color: #469c04;
-  }
   </style>
