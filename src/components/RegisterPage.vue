@@ -1,6 +1,6 @@
 <template>
     <div class="container d-flex justify-content-center align-items-center vh-150">
-      <div class="border pt-5 p-5 mb-2 bg-dark text-white register-container rounded-4" style="width: 600px; height: 400px;">
+      <div class="border pt-5 p-5 mb-2 bg-dark text-white register-container rounded-4">
       <h2 class="user-select-none">Please Enter Your Details Bellow</h2>
       <form @submit.prevent="createUser"> 
         <div>
@@ -12,11 +12,11 @@
       </div>
   
         <div>
-        <input type="text" class="form-control m-2" placeholder="Password" aria-label="Password" aria-describedby="Password" v-model="password" required />
+        <input type="Password" class="form-control m-2" placeholder="Password" aria-label="Password" aria-describedby="Password" v-model="password" required />
       </div>
 
         <div>
-        <input type="text" class="form-control m-2" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1" v-model="confirmPassword" required />
+        <input type="Password" class="form-control m-2" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1" v-model="confirmPassword" required />
       </div>
   
         <button type="submit" class ="btn btn-light btn-outline-success m-2">Register</button>

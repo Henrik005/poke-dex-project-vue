@@ -1,6 +1,6 @@
 
 <template>
-  <div bg-dark class="p-3 mb-2 bg-dark text-white" style="height: 100vh; width: 100vw;">
+  <div bg-dark class="scale p-3 mb-2 bg-dark text-white">
     
     <h2 class="text-center user-select-none">Welcome to the Pokedex</h2>
     <p class="text-center user-select-none">Explore the world of Pokemon!</p>
@@ -42,3 +42,9 @@
 <script setup>
 
 </script>
+<style scoped>
+.scale{
+  height: 100vh;
+  width: 100vw;
+}
+</style>

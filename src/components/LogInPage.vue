@@ -1,17 +1,17 @@
 <template>
   <div class = "container d-flex justify-content-center align-items-center vh-150">
-  <div class="border pt-5 p-5 mb-2 bg-dark text-white login rounded-4" style = "width: 600px; height: 400px;">
+  <div class="pt-5 p-5 mb-2 bg-dark text-white login rounded-4">
     <h2 class ="user-select-none">Enter Your Username & Password</h2>
     <form @submit.prevent="login">
-      
+      <!-- style = "width: 600px; height: 400px;" -->
       <div>
         <input type="text" class="form-control m-2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="username" required />
       </div>
       <div>
-       <input type="text" class="form-control m-2" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" v-model="password" required />
+       <input type="password" class="form-control m-2" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" v-model="password" required />
       </div>
       
-      <button type="button" class ="btn btn-light btn-outline-primary m-3">Login</button>
+      <button @click="login" type="button" class ="btn btn-light btn-outline-primary m-3">Login</button>
       
     </form>
     <p></p>
